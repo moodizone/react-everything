@@ -2,16 +2,31 @@ import React, { useRef } from "react";
 import Layout from "../../Components/Layout";
 
 const SeveralUseState = () => {
-  const numberOfRendered = useRef<number>(0);
-  const [state1, setState1] = React.useState<number>(0);
+  const lazyInitializer = () => {
+    lazyInitializerCount.current++;
+    return 0;
+  };
+  const updateCount = useRef<number>(0);
+  const mountCount = useRef<number>(0);
+  const lazyInitializerCount = useRef<number>(0);
+  const [state1, setState1] = React.useState<number>(lazyInitializer);
   const [state2, setState2] = React.useState<string>("0");
+
   React.useEffect(() => {
-    numberOfRendered.current++;
+    updateCount.current++;
+    console.log('inside update effect');
   });
+  React.useLayoutEffect(() => {
+    mountCount.current++;
+    console.log('inside mount effect');
+  }, []);
+
   return (
     <Layout>
       <div style={{ margin: 20, padding: 20 }}>
-        <p>{`render counts : ${numberOfRendered.current}`}</p>
+        <p>{`lazyInitializer counts : ${lazyInitializerCount.current}`}</p>
+        <p>{`mount counts : ${mountCount.current}`}</p>
+        <p>{`update counts : ${updateCount.current}`}</p>
         <p>{`state1 : ${state1}`}</p>
         <p>{`state1 : ${state2}`}</p>
         <button
