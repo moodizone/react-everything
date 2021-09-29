@@ -9,6 +9,9 @@ const Index = () => {
         <li>
           <Link to="/several-useState">several-useState</Link>
         </li>
+        <li>
+          <Link to="/error-boundary">error-boundary</Link>
+        </li>
       </ul>
     </nav>
   );
