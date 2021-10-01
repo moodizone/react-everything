@@ -10,3 +10,5 @@
 - Error in boundary itself
 
 3- Async and Event errors should be caught imperatively (try-catch)
+
+4- Resetting `<ErrorBoundary />` means remount mentioned component.
