@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../Router";
 
 const Index = () => {
   return (
     <nav style={{ margin: 20, padding: 20 }}>
       <p>list of pages :</p>
       <ul>
-        <li>
-          <Link to="/several-useState">several-useState</Link>
-        </li>
-        <li>
-          <Link to="/error-boundary">error-boundary</Link>
-        </li>
+        {Object.values(ROUTES).map(({ path, key }) => (
+          <li key={key}>
+            <Link to={path}>{key}</Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );
