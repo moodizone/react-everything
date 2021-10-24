@@ -2,9 +2,22 @@ import React, { DependencyList, useEffect } from "react";
 
 type ReadyState = "inProgress" | "finished" | "idle";
 
+/**
+ *
+ * @param fn It should be use within `React.useCallback` if it change during render.
+ *
+ * @param debounce in milliseconds. Default value is `0`
+ *
+ * @param deps It's trigger list and execute fn on changing.
+ *
+ * @return isReady Indicate current task state.
+ *
+ * @example
+ * [isReady] = useDebounce(()=>fetchAPI(searchTerm), 300 , [searchTerm])
+ */
 export default function useDebounce(
   fn: Function,
-  delay: number,
+  debounce = 0,
   deps: DependencyList
 ) {
   const callback = React.useRef<Function>(fn);
@@ -18,8 +31,8 @@ export default function useDebounce(
     timeout.current = setTimeout(() => {
       ready.current = "finished";
       callback.current();
-    }, delay);
-  }, [delay, deps]);
+    }, debounce);
+  }, [debounce, deps]);
 
   return [isReady];
 }

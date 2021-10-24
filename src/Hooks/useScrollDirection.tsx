@@ -13,6 +13,14 @@ function scrollReducer(prevState: StateType, scrollY: number): StateType {
   else throw Error(`Unhandled action : ${scrollY}`);
 }
 
+/**
+ *
+ * @param debounce in milliseconds. Default value is `0`
+ *
+ * @return
+ * - scrollY: `window.scrollY`
+ * - direction: Scrolling direction. Default is `idle`
+ */
 export default function useScrollDirection(debounce = 0): StateType {
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
   const [state, action] = React.useReducer(scrollReducer, {
