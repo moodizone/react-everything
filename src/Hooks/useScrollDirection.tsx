@@ -7,14 +7,14 @@ interface StateType {
 }
 
 function scrollReducer(prevState: StateType, scrollY: number): StateType {
-  if (scrollY === 0) return { scrollY: 0, direction: "idle" };
+  if (scrollY === prevState.scrollY) return { scrollY, direction: "idle" };
   else if (scrollY > prevState.scrollY) return { scrollY, direction: "down" };
   else if (scrollY < prevState.scrollY) return { scrollY, direction: "up" };
   else throw Error(`Unhandled action : ${scrollY}`);
 }
 
 /**
- *
+ * This method use for detecting vertical scrolling direction
  * @param debounce in milliseconds. Default value is `0`
  *
  * @return
