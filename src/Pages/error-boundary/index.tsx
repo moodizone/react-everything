@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import styles from "./styls.module.scss";
 import Side from "./parts/Side";
